@@ -1,0 +1,66 @@
+group 'com.example.temp_project'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.example.temp_project'
+    }
+
+    compileSdk 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+}
+
+
+dependencies{
+    implementation("com.google.android.exoplayer:exoplayer-core:2.18.6")
+//    implementation("com.google.android.exoplayer:exoplayer-hls::2.18.4")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.18.6")
+    implementation("com.google.android.exoplayer:exoplayer-dash:2.18.6")
+    implementation("com.google.android.exoplayer:extension-okhttp:2.18.6")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.karumi:dexter:6.2.2")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+}
